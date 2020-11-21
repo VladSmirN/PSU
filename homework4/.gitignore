@@ -1,0 +1,10 @@
+.ipynb_checkpoints
+*.csv
+*.txt
+*.log
+*.rar
+.idea
+__pycache__
+dataset
+output
+ans
