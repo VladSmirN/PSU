@@ -4,11 +4,13 @@ import logging
 from tqdm import tqdm
 import sys
 
-logging.basicConfig(filename='changeSize.log', level=logging.INFO)
+
 
 def changeSize(path,width, height,output):
+
     try:
         os.mkdir(output)
+        logging.basicConfig(filename=output + 'changeSize.log', level=logging.INFO)
         logging.info( 'create folder - ' +output )
     except OSError:
         logging.info( 'folder ' +output+' already exist')
@@ -24,7 +26,7 @@ def changeSize(path,width, height,output):
         except:
             logging.warning('Failed resize for ' + path+imageName)
     logging.info('successful execution. Image resize: ' +str(c))
-
+    logging.shutdown()
 
 if __name__ == '__main__':
     print(sys.argv )
