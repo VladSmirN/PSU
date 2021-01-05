@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  frontend:
+    volumes:
+      #- /c/project/web-page-template/web-page-template:/var/lib/docker/containers/frontend/web-page-template
+      - ./log:/var/lib/docker/containers/frontend/web-page-template/log
+    build: ./frontend 
+    ports:
+      - "8080:5000"
+    links:
+      - "backend:backend"
+  backend:
+    build: ./backend
