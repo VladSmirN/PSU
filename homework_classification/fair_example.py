@@ -5,7 +5,7 @@
 import pandas as pd
 import argparse
 import pickle
-
+import xgboost as xgb
 
 parser = argparse.ArgumentParser()
 parser.add_argument("in_file")
@@ -46,13 +46,14 @@ def prepaer_df(df):
 
 data= prepaer_df(data)
 feature = data.drop(columns=['time'])
+feature = feature.astype('int32')
 input = open('model.pkl', 'rb')
 clf = pickle.load(input)
 input.close()
 
-predictions = clf.predict(feature)
+predictions = clf.predict(xgb.DMatrix(feature))
 predictions_df = pd.DataFrame(data=predictions,  columns=["res" ])
-
+predictions_df = predictions_df.astype('int32') 
 # тут зачехлить свою магию обратно
 predictions_df.to_csv(args.out_file)
 
